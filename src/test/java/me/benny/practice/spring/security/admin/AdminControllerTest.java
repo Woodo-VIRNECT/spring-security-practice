@@ -53,6 +53,7 @@ class AdminControllerTest {
 
     @Test
     void getNoteForAdmin_어드민인증있음() throws Exception {
+        // ~.with 직접 사용자를 mockMvc에 지정하는 방식입니다.
         mockMvc.perform(get("/admin").with(csrf()).with(user(admin))) // 어드민 추가
                 .andExpect(status().is2xxSuccessful());
     }

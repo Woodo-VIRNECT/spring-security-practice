@@ -43,6 +43,9 @@ class NoticeControllerTest {
     @Test
     @WithMockUser
     void getNotice_인증있음() throws Exception {
+        // @WithMockUser : 특정 사용자가 존재하는 것처럼 테스트 진행할 수 있습니다.
+        // 여기서 User 는 org.springframework.security.core.userdetails.User 를 말한다.
+
         mockMvc.perform(get("/notice"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("notice/index"));
