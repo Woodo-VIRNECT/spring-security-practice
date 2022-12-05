@@ -9,7 +9,8 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * JWT Key를 제공하고 조회합니다.
+ * JWT Key를 관리하고 제공합니다.
+ * Key Rolling 을 지원합니다.
  */
 public class JwtKey {
     /**

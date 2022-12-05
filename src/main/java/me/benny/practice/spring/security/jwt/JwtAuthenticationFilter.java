@@ -70,6 +70,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             HttpServletResponse response,
             AuthenticationException failed
     ) throws IOException {
+        // 인증에 실패했을 경우에는 login 페이지로 redirect
         response.sendRedirect("/login");
     }
 }

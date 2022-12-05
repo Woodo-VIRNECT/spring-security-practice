@@ -9,6 +9,9 @@ import org.springframework.data.util.Pair;
 import java.security.Key;
 import java.util.Date;
 
+/**
+ * JWT 토큰을 생성하거나 Parsing 하는 메소드를 제공합니다.
+ */
 public class JwtUtils {
     /**
      * 토큰에서 username 찾기

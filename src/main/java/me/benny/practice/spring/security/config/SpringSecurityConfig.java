@@ -41,7 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         // remember-me
         http.rememberMe().disable();
-        // stateless
+        // stateless : session 을 사용하지 않고 stateless 상태인 JWT 를 사용하여 spring security 와 연동
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // jwt filter

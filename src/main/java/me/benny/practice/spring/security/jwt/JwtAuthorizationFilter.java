@@ -42,6 +42,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     .map(Cookie::getValue)
                     .orElse(null);
         } catch (Exception ignored) {
+            // 아무것도 하지 않습니다.
         }
         if (token != null) {
             try {
