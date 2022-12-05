@@ -33,6 +33,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
     private final UserRepository userRepository;
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // basic authentication
