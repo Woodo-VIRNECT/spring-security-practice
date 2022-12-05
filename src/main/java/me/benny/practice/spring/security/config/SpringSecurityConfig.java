@@ -36,6 +36,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        /*
+        .httpBasic().disable() : rest api 이므로 basic auth 인증을 사용하지 않는다는 설정입니다.
+        .csrf().disable() : rest api 이므로 csrf 보안을 사용하지 않습니다.
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) : JWT를 사용하기 때문에 세션을 사용하지 않는다는 설정입니다.
+        .antMatchers().permitAll() : 모든 요청을 허가한다는 설정입니다.
+        .antMatchers().hasRole("USER") : USER 권한이 있어야 요청할 수 있다는 설정입니다.
+        .antMatchers().hasRole("ADMIN") : ADMIN 권한이 있어야 요청할 수 있다는 설정입니다.
+        .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class) : Jwt 인증을 위하여 직접 구현한 필터를 UsernamePasswordAuthenticationFilter 전에 실행하겠다는 설정입니다.
+        */
+
+
         // basic authentication
         http.httpBasic().disable(); // basic authentication filter 비활성화
         // csrf
