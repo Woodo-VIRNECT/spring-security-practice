@@ -48,8 +48,8 @@ class NoteControllerTest {
     @Test
     void getNote_인증없음() throws Exception {
         mockMvc.perform(get("/note"))
-                .andExpect(redirectedUrlPattern("**/login"))
-                .andExpect(status().is3xxRedirection());
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrlPattern("**/login"));
     }
 
     @Test
@@ -59,10 +59,9 @@ class NoteControllerTest {
     * WithMockUser 와 다른점은, 가짜 User 를 가져올 때 UserDetailsService 의 Bean 이름을 넣어줘서
     * userDetailsService.loadUserByUsername(String username) 을 통해 커스텀된 User 를 가져옵니다.
     * */
-
     @WithUserDetails(
             value = "user123", // userDetailsService 를 통해 가져올 수 있는 유저
-            userDetailsServiceBeanName = "userDetailsService", // UserDetailsService 구현체의 Bean
+            userDetailsServiceBeanName = "userDetailsService", // SpringSecurityConfig 에 Override 한 userDetailsService() 메소드명 으로 Bean 생성
             setupBefore = TestExecutionEvent.TEST_EXECUTION // 테스트 실행 직전에 유저를 가져온다.
     )
     void getNote_인증있음() throws Exception {
@@ -71,6 +70,17 @@ class NoteControllerTest {
                 ).andExpect(status().isOk())
                 .andExpect(view().name("note/index"))
                 .andDo(print());
+    }
+
+    @Test
+    @WithUserDetails(
+        value = "admin123",
+        userDetailsServiceBeanName = "userDetailsService",
+        setupBefore = TestExecutionEvent.TEST_EXECUTION
+    )
+    void getNote_어드민권한없음() throws Exception {
+        mockMvc.perform(get("/note"))
+            .andExpect(status().isForbidden());
     }
 
     @Test

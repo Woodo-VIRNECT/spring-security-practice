@@ -36,8 +36,8 @@ class NoticeControllerTest {
     @Test
     void getNotice_인증없음() throws Exception {
         mockMvc.perform(get("/notice"))
-                .andExpect(redirectedUrlPattern("**/login"))
-                .andExpect(status().is3xxRedirection());
+            .andExpect(status().is3xxRedirection())
+            .andExpect(redirectedUrlPattern("**/login"));
     }
 
     @Test
@@ -45,7 +45,6 @@ class NoticeControllerTest {
     void getNotice_인증있음() throws Exception {
         // @WithMockUser : 특정 사용자가 존재하는 것처럼 테스트 진행할 수 있습니다.
         // 여기서 User 는 org.springframework.security.core.userdetails.User 를 말한다.
-
         mockMvc.perform(get("/notice"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("notice/index"));
@@ -80,7 +79,11 @@ class NoticeControllerTest {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("title", "제목")
                         .param("content", "내용")
-        ).andExpect(redirectedUrl("notice")).andExpect(status().is3xxRedirection());
+        )
+            .andExpect(status().is3xxRedirection())
+            .andExpect(redirectedUrlPattern("**/notice"))
+            .andExpect(redirectedUrl("notice"));
+
     }
 
     @Test
